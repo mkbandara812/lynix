@@ -299,6 +299,48 @@ h1, h2, h3, h4, .nav-brand, .product-price {
   margin-bottom: 4rem;
 }
 
+/* --- Cart & Checkout Layout --- */
+.checkout-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) 400px;
+  gap: 3rem;
+  align-items: start;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.cart-item-remove {
+  padding: 10px;
+  background: rgba(239, 68, 68, 0.1);
+  border: none;
+  color: var(--danger);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkout-summary-container {
+  position: sticky;
+  top: 100px;
+}
+
 .footer-brand h4 {
   font-size: 1.8rem;
   font-weight: 900;
@@ -362,6 +404,36 @@ h1, h2, h3, h4, .nav-brand, .product-price {
 
   /* Cart checkout layout — stack vertically */
   .container { padding: 0 1rem; }
+  
+  .checkout-grid, .profile-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .cart-item img {
+    height: 180px !important;
+    width: 100% !important;
+  }
+  
+  .cart-item-remove {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .checkout-summary-container {
+    position: static;
+  }
 
   /* Footer grid — 2 columns on mobile */
   .footer-grid {
@@ -404,15 +476,5 @@ h1, h2, h3, h4, .nav-brand, .product-price {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 1rem !important;
-  }
-
-  /* Cart step navigation button */
-  div[style*="gridTemplateColumns: 'minmax(300px, 1fr) 400px'"] {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Make the order summary sticky sidebar full width */
-  div[style*="position: sticky"][style*="top: 100px"] {
-    position: static !important;
   }
 }
