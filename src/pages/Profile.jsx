@@ -99,7 +99,7 @@ export default function Profile() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: '2.5rem', alignItems: 'start' }}>
+      <div className="profile-grid">
         
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', background: 'rgba(15,20,30,0.5)', padding: '1rem', borderRadius: '24px', border: '1px solid var(--border)' }}>
