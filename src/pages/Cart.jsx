@@ -14,6 +14,10 @@ export default function Cart() {
   const [step, setStep] = useState(1);
   const [promoCode, setPromoCode] = useState('');
   const [discountPercent, setDiscountPercent] = useState(0);
+
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
   const [promo, setPromo] = useState(null);
 
   React.useEffect(() => {
@@ -121,12 +125,12 @@ export default function Cart() {
         <div><h1 style={{ fontSize: '2rem', fontWeight: '900' }}>Checkout</h1><p style={{ color: 'var(--text-muted)' }}>{step === 1 ? 'Review your selection' : step === 2 ? 'Delivery information' : 'Secure payment'}</p></div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 400px', gap: '3rem', alignItems: 'start' }}>
+      <div className="checkout-grid">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {step === 1 && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
               {cartItems.map(item => (
-                <div key={item.id} className="glass-card" style={{ padding: '1.5rem', display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                <div key={item.id} className="glass-card cart-item" style={{ padding: '1.5rem' }}>
                   <img src={item.image} style={{ width: '100px', height: '100px', borderRadius: '16px', objectFit: 'cover', background: '#fff' }} />
                   <div style={{ flex: 1 }}>
                     <h3 style={{ fontWeight: '800', marginBottom: '4px' }}>{item.name}</h3>
@@ -143,7 +147,7 @@ export default function Cart() {
                       <span style={{ fontWeight: '900', color: 'var(--primary)' }}>Rs. {(item.price * item.quantity).toLocaleString()}</span>
                     </div>
                   </div>
-                  <button onClick={() => removeFromCart(item.id)} style={{ padding: '10px', background: 'rgba(239, 68, 68, 0.1)', border: 'none', color: 'var(--danger)', borderRadius: '12px', cursor: 'pointer' }}><Trash2 size={20}/></button>
+                  <button className="cart-item-remove" onClick={() => removeFromCart(item.id)}><Trash2 size={20}/></button>
                 </div>
               ))}
             </div>
@@ -151,12 +155,12 @@ export default function Cart() {
 
           {step === 2 && (
             <div className="glass-card" style={{ padding: '2.5rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+              <div className="form-row">
                 <div className="form-group"><label>First Name</label><input type="text" className="form-input" value={customer.firstName} onChange={e => setCustomer({...customer, firstName: e.target.value})} /></div>
                 <div className="form-group"><label>Last Name</label><input type="text" className="form-input" value={customer.lastName} onChange={e => setCustomer({...customer, lastName: e.target.value})} /></div>
               </div>
               <div className="form-group" style={{ marginBottom: '1.5rem' }}><label>Email Address</label><input type="email" className="form-input" value={customer.email} onChange={e => setCustomer({...customer, email: e.target.value})} /></div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+              <div className="form-row">
                 <div className="form-group"><label>Phone Number</label><input type="tel" className="form-input" value={customer.phone} onChange={e => setCustomer({...customer, phone: e.target.value})} /></div>
                 <div className="form-group"><label>District</label><input type="text" className="form-input" value={customer.district} onChange={e => setCustomer({...customer, district: e.target.value})} /></div>
               </div>
@@ -177,7 +181,7 @@ export default function Cart() {
           )}
         </div>
 
-        <div style={{ position: 'sticky', top: '100px' }}>
+        <div className="checkout-summary-container">
           <div className="glass-card" style={{ padding: '2rem' }}>
             <h3 style={{ marginBottom: '1.5rem', fontWeight: '900' }}>Order Summary</h3>
             
